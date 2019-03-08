@@ -100,4 +100,52 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    	}
 		    });
 		}
+		//添加
+		function newUser(){
+			$("#dlg").dialog("open").dialog("setTitle","添加学生");
+			$("#fm").form("clear");
+			
+			// 设置单选按钮默认选中
+			$('[name="vo.student_sex"]:radio').each(function() {   
+                if (this.value == '男'){   
+                   this.checked = true;   
+                }       
+            }); 
+			url="StudentManageAction!save.action";
+		}
+	
+		//编辑
+		function editUser(){
+			var selectedRows=$("#dg").datagrid("getSelections");
+			if(selectedRows.length!=1){
+	    		$.messager.alert("系统提示","请选择一条要修改的数据！","warning");
+	    		return;
+	    	}
+	    	var row=selectedRows[0];
+	    	
+	    	$("#dlg").dialog("open").dialog("setTitle","编辑学生");
+	    	$("#student_userName").val(row.student_userName);
+	    	/* $("#student_userPass").val(row.student_userPass); */
+	    	$("#student_name").val(row.student_name);
+	    	// 赋值给界面radio控件
+	    	if(row.student_sex == "男"){
+	    		$('input:radio[name="vo.student_sex"][value="男"]').prop('checked', true);
+	    	}else if(row.student_sex == "女"){
+	    		$('input:radio[name="vo.student_sex"][value="女"]').prop('checked', true);
+	    	}
+	    	//赋值给界面的checkBox
+	    	if(row.student_headFlag == "是"){
+	    		$("[name='vo.student_headFlag']").attr("checked","checked");
+	    	}else{
+	    		$("[name='vo.student_headFlag']").removeAttr("checked"); //从每一个匹配的元素中删除一个属性
+	    	}
+	    	
+	    	$("#student_institution").val(row.student_institution);
+	    	$("#student_major").val(row.student_major);
+	    	$("#student_class").val(row.student_class);
+	    	$("#student_phone").val(row.student_phone);
+	    	$("#student_remark").val(row.student_remark);
+
+	    	url="StudentManageAction!save.action?student_id="+row.student_id;
+		}
 		
