@@ -173,3 +173,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 function exportUser(){
 			$('#condition').submit();
 		}
+		// 获取当前时间
+		function myformatterStart(date){  
+		     var y = date.getFullYear();  
+            var m = date.getMonth()+1;  
+            var d = date.getDate();  
+            var h = date.getHours();  
+            var min = date.getMinutes();  
+            var sec = date.getSeconds();
+            var time = y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d)+' '+(h<10?('0'+h):h)+':'+(min<10?('0'+min):min)+':'+(sec<10?('0'+sec):sec);
+            return time; 
+		}  
+		
+		function myformatterEnd(date){  
+		    var y = date.getFullYear();  
+            var m = date.getMonth()+1;  
+            var d = date.getDate();  
+            var h = date.getHours();  
+            var min = date.getMinutes();  
+            var sec = date.getSeconds();
+            var time = y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d)+' '+(h<10?('0'+h):h)+':'+(min<10?('0'+min):min)+':'+(sec<10?('0'+sec):sec);
+            return time; 
+		}  
+		          
+		function myparser(s){  
+		    if (!s) return new Date();
+		    if(s != null && s.length > 0 && s != undefined){
+		    	var ss = (s.split('-')); 
+			    var y = parseInt(ss[0],10);  
+			    var m = parseInt(ss[1],10);  
+			    var d = parseInt(ss[2],10); 
+			    var tt = ss[2];
+			    tt = (tt.split(' '));
+			    var time = tt[1];
+			    ss = (time.split(':')); 
+			     var h = parseInt(ss[0],10);  
+			     var min = parseInt(ss[1],10); 
+			     var sec = parseInt(ss[2],10); 
+	            if (!isNaN(y) && !isNaN(m) && !isNaN(d) && !isNaN(h) && !isNaN(min) && !isNaN(sec)){  
+	                return new Date(y,m-1,d,h,min,sec);  
+	            } else {  
+	                return new Date();  
+	            }  
+		    }  
+		} 
