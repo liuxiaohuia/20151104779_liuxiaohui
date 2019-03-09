@@ -148,4 +148,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	    	url="StudentManageAction!save.action?student_id="+row.student_id;
 		}
-		
+		//保存
+		function saveUser(){
+			$("#fm").form("submit",{
+				url:url,
+				onSubmit:function(){
+					return $(this).form('validate');
+				},
+				success:function(result){
+					var result=eval("("+result+")");
+					if(result.errorMsg){
+						$.messager.alert("系统提示",result.errorMsg,"warning");
+						return;
+					}else{
+						$.messager.alert("系统提示","您已经保存成功！","info");
+						$("#dlg").dialog("close");
+						$("#dg").datagrid("reload");
+					}
+				}
+			});
+		}
+
+		//用模版导出用户
+		 function exportUser(){
+			$('#condition').submit();
+		}
