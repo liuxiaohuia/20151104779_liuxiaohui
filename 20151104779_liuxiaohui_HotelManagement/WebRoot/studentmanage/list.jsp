@@ -250,4 +250,113 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    	$("#student_buildingLack").val(row.student_building);
 	    	$("#student_dormLack").val(row.student_dorm);
 	    	$("#student_remarkLack").val();
+	    	// 设置时间  
+			/* var curr_time = new Date();   
+	    	// 设置日期框中的默认值
+			$("#txtBeginTime").datebox("setValue",myformatterStart(curr_time));  
+			$("#txtEndTime").datebox("setValue",myformatterEnd(curr_time));  */
+
+	    	url="StudentManageAction!saveLack.action?lackFlag=" + 1;
+		}
+		
+		//缺寝记录 保存
+		function saveUserLack(){
+			var realName = $("#realName").val();
+			
+			$("#fmLack").form("submit",{
+				url:url,
+				onSubmit:function(){
+					return $(this).form('validate');
+				},
+				success:function(result){
+					var result=eval("("+result+")");
+					if(result.errorMsg){
+						$.messager.alert("系统提示",result.errorMsg,"warning");
+						return;
+					}else{
+						$.messager.alert("系统提示","缺寝录入成功，已通知该学生！","info");
+						$("#dlgLack").dialog("close");
+						$("#dg").datagrid("reload");
+					}
+				}
+			});
+		}
+		
+	</script>
+  </head>
+  
+<body style="margin:5px">
+	<input type="hidden" name="loginFlag" id="loginFlag" value="${sessionScope.loginFlag }"/>
+    <table id="dg" title="学生基本信息" class="easyui-datagrid" style="width:900px;"
+            url="StudentManageAction!list.action" 
+            toolbar="#toolbar" pagination="true" pageList=[5,10,15]
+            rownumbers="true" fitColumns="true" fit="true" >
+        <thead>
+            <tr>
+            	<th field="student_id" checkbox="true" align="center">id</th>
+            	<th field="student_userName" width="100" align="center">学号</th>
+            	<th field="student_userPass" width="80" align="center">密码</th>
+                <th field="student_name" width="50" align="center">姓名</th>
+                <th field="student_sex" width="40" align="center">性别</th>
+                <th field="student_institution" width="70" align="center">学院</th>
+                <th field="student_major" width="100" align="center">专业</th>
+                <th field="student_class" width="40" align="center">班级</th>
+                <th field="student_headFlag" width="50" align="center">负责人</th>
+                <th field="student_phone" width="100" align="center">电话</th>
+                <th field="student_building" width="50" align="center">楼宇</th>
+                <th field="student_dorm" width="50" align="center">宿舍</th>
+                <th field="student_state" width="50" align="center">状态</th>
+                <th field="student_remark" width="200" align="center">备注</th>
+            </tr>
+        </thead>
+    </table>
+    <div id="toolbar">
+      <div id="systemShow" style="float: left">
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">添加学生</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">编辑学生</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="deleteUser()">删除学生</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-export" plain="true" onclick="exportUser()">导出学生</a>
+      </div>
+      <div id="teacherShow" style="float: left">
+       	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-inDorm" plain="true" onclick="studentIndorm()">入住登记</a>
+       	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-fenseRegister" plain="true" onclick="lackUser()">缺寝登记</a>
+       	<!-- <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-lanseRegister" plain="true" onclick="studentOutDorm()">迁出登记</a> -->
+      </div>
+      <div id="vipStudentShow" style="float: left">
+       	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-fenseRegister" plain="true" onclick="lackUser()">缺寝登记</a>
+      </div>
+      <div>
+  		<form id="condition" name="condition" action="StudentManageAction!export.action" method="post"> 
+      		&nbsp;&nbsp;
+      		查询：
+	      	<select id="s_state" class="easyui-combobox" name="s_state" style="width:100px;">   
+			    <option value="0">==全部状态==</option>   
+			    <option value="1">入住</option>   
+			    <option value="2">未入住</option> 
+			    <option value="3">迁出</option>     
+			</select>
+			<select class="easyui-combobox" style="width:130px;" id="s_institution" name="s_institution">
+				<option value="">==全部学院==</option>   
+				<option value="政治与法学学院">政治与法学学院</option>
+				<option value="体育学院">体育学院</option>
+				<option value="中国语言文学学院">中国语言文学学院</option>
+				<option value="外国语言文学学院">外国语言文学学院</option>
+				<option value="新闻传播学院">新闻传播学院</option>
+				<option value="音乐学院">音乐学院</option>
+				<option value="美术学院">美术学院</option>
+				<option value="数学学院">数学学院</option>
+				<option value="物理与电子学院">物理与电子学院</option>
+				<option value="化学化工学院">化学化工学院</option>
+				<option value="机械工程学院">机械工程学院</option>
+				<option value="信息与通信工程学院">信息与通信工程学院</option>
+				<option value="计算机学院">计算机学院</option>
+				<option value="土木建筑工程学院">土木建筑工程学院</option>
+				<option value="经济与管理学院">经济与管理学院</option>
+			</select>
+			<input class="easyui-validatebox" style="width:40px;height:22;" id="s_class" name="s_class">班
+      		<input class="easyui-validatebox" style="width:100px;height:22;" id="s_name" name="s_name" placeholder="请输入姓名">
+        	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" id="btn" plain="true" onclick="searchUser()">搜索</a>
+        </form>
+  	  </div>
+    </div>
 	    	
