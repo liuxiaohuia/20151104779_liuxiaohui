@@ -217,3 +217,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            }  
 		    }  
 		} 
+		//缺寝登记
+		function lackUser(){
+			var selectedRows=$("#dg").datagrid("getSelections");
+			if(selectedRows.length!=1){
+	    		$.messager.alert("系统提示","请先选择缺寝的学生！","warning");
+	    		return;
+	    	}
+	    	var row=selectedRows[0];
+	    	if(row.student_building == null || row.student_building == ""
+	    		 || row.student_dorm == null || row.student_dorm == ""){
+	    		$.messager.alert("系统提示","该学生还没有入住寝室，请确认后登记！","warning");
+	    		return;
+	    	}
+	    	
+	    	$("#dlgLack").dialog("open").dialog("setTitle","学生缺寝登记");
+	    	$("#fmLack").form("clear");
+	    	$("#student_userNameLack").val(row.student_userName);
+	    	$("#student_id").val(row.student_id);
+	    	$("#student_nameLack").val(row.student_name);
+	    	
+	    	// 赋值给界面radio控件
+	    	if(row.student_sex == "男"){
+	    		$('input:radio[name="vo.student_sex"][value="男"]').prop('checked', true);
+	    	}else if(row.student_sex == "女"){
+	    		$('input:radio[name="vo.student_sex"][value="女"]').prop('checked', true);
+	    	}
+	    	
+	    	$("#student_institutionLack").val(row.student_institution);
+	    	$("#student_majorLack").val(row.student_major);
+	    	$("#student_classLack").val(row.student_class);
+	    	$("#student_buildingLack").val(row.student_building);
+	    	$("#student_dormLack").val(row.student_dorm);
+	    	$("#student_remarkLack").val();
+	    	
