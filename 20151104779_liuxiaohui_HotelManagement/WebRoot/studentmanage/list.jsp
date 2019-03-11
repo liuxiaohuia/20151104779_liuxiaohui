@@ -359,4 +359,58 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </form>
   	  </div>
     </div>
+     <!-- 增加 和 修改 -->
+    <div id="dlg" class="easyui-dialog" style="width:420px;height:425px;padding:10px 20px"
+            closed="true" buttons="#dlg-buttons">
+        <form id="fm" method="post">
+        	<table cellspacing="10px;">
+        		<tr>
+        			<td>学号：</td>
+        			<td><input name="vo.student_userName" id="student_userName" class="easyui-validatebox" required="true" style="width: 200px;"></td>
+        		</tr>
+        		<tr>
+        			<td>姓名：</td>
+        			<td><input name="vo.student_name" id="student_name" class="easyui-validatebox" required="true" style="width: 200px;"></td>
+        		</tr>
+        		<tr>
+        			<td>性别：</td>
+        			<td>
+        				男：<input name="vo.student_sex" id="student_sex" type="radio" class="easyui-validatebox" checked="checked" required="true" value="男">
+        				女：<input name="vo.student_sex" id="student_sex" type="radio" class="easyui-validatebox" required="true" value="女">
+        			</td>
+        		</tr>
+        		<tr>
+        			<td>学院：</td>
+        			<td><input name="vo.student_institution" id="student_institution" class="easyui-validatebox" required="true" style="width: 200px;"></td>
+        		</tr>
+        		<tr>
+        			<td>专业：</td>
+        			<td><input name="vo.student_major" id="student_major" class="easyui-validatebox" required="true" style="width: 200px;"></td>
+        		</tr>
+        		<tr>
+        			<td>班级：</td>
+        			<td><input name="vo.student_class" id="student_class" class="easyui-validatebox" required="true" style="width: 200px;"></td>
+        		</tr>
+        		<tr>
+        			<td>联系电话：</td>
+        			<td><input name="vo.student_phone" id="student_phone" class="easyui-validatebox" required="true" style="width: 200px;"></td>
+        		</tr>
+        		<tr>
+        			<td>备注：</td>
+        			<td><input name="vo.student_remark" id="student_remark" class="easyui-validatebox" required="true" style="width: 200px;"></td>
+        		</tr>
+        		<tr>
+        			<td colspan="2"><font color="red">是否为班级负责人：
+        				<input type="checkbox" name="vo.student_headFlag" id="student_headFlag" value="是">
+        				(选中表示是)</font>
+        			</td>
+        		</tr>
+        	</table>
+        </form>
+    </div>
+    
+	<div id="dlg-buttons">
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveUser()">保存</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">关闭</a>
+	</div>
 	    	
