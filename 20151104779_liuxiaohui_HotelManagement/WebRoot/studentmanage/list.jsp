@@ -413,4 +413,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveUser()">保存</a>
 		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">关闭</a>
 	</div>
+	<!-- 入住的 js -->
+	<script type="text/javascript">
+		/* 入住登记 */
+		function studentIndorm(){
+			var selectedRows=$("#dg").datagrid("getSelections");
+			if(selectedRows.length!=1){
+	    		$.messager.alert("系统提示","请选择一条要入住的学生记录！","warning");
+	    		return;
+	    	}
+	    	var row=selectedRows[0];
+	    	var student_state = row.student_state;
+	    	if(student_state == "入住"){
+	    		$.messager.alert("系统提示","该生处于入住状态，请选择未入住学生操作！","warning");
+	    		return;
+	    	}
+	    	if(student_state == "迁出"){
+	    		$.messager.alert("系统提示","该生处于迁出状态，禁止入住！","warning");
+	    		return;
+	    	}
+	    	var student_userName = row.student_userName;
+	    	var student_name = row.student_name;
+	    	$("#student_userName_indorm").val(student_userName);
+	    	$("#student_userName_indorm1").val(student_userName);
+	    	$("#student_name_indorm").val(student_name);
+	    	
+	    	// 查询出全部的building列表
+			$.post("<%=basePath%>StudentManageAction!queryAllBuilding.action?index="+Math.random(),null,callbackByBuilding);
+			function callbackByBuilding(data){
+				$("#buildingData").html(data);
+			}
+	    	
+			$("#dlginDrom").dialog("open").dialog("setTitle","学生入住登记");
+			
+		}
 	    	
