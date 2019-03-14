@@ -480,4 +480,48 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 		}
 	</script>
+	<!-- 入住登记 -->
+	<div id="dlginDrom" class="easyui-dialog" style="width:380px;height:295px;padding:15px 29px"
+            closed="true" buttons="#dlg-buttonsinDrom">
+    	<form id="form1" method="post">
+			<table class="table-edit" width="100%" cellspacing="10px;">				
+				<tr>
+					<td><b>楼&nbsp;&nbsp;宇：</b>
+						<span id="buildingData">
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td><b>宿&nbsp;&nbsp;舍：</b>
+						<span id="dormData">
+							<select id="dorm_id" name="dorm_id" style="width : 170">
+								<option value="">==全部==</option>
+							</select>
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>学生学号：</b>
+						<input type="text" id="student_userName_indorm" name="student_userName1" class="easyui-validatebox" disabled="disabled"/>
+						<input type="hidden" id="student_userName_indorm1" name="student_userName"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>学生姓名：</b>
+						<input type="text" id="student_name_indorm" name="student_name" class="easyui-validatebox" disabled="disabled"/>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" align="left">
+						<font color="red" style="font-size: 12">注：请选择楼宇和宿舍后确定入住！</font>
+					</td>
+				</tr>
+			</table>
+		</form>
+    </div>
+    <div id="dlg-buttonsinDrom">
+    	<a href="javascript:void(0)" onclick="inDorm()" class="easyui-linkbutton" plain="true" icon="icon-search">确定入住</a>
+    </div>
 	    	
