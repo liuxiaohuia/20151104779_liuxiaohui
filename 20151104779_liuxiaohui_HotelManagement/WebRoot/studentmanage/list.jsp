@@ -447,4 +447,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$("#dlginDrom").dialog("open").dialog("setTitle","学生入住登记");
 			
 		}
+		//根据buildingID查询出对应的Dorm列表
+		function changeBuilding(id){
+			var building_id=$("#building_id").val();
+			if(building_id!=""){
+				$.post("<%=basePath%>StudentManageAction!queryDormByBuilding.action",
+						"building_id="+building_id+"&index="+Math.random(),callbackByDorm);
+			}
+		}
+		function callbackByDorm(data){
+			$("#dormData").html(data).find('select').combobox();
+		}
 	    	
