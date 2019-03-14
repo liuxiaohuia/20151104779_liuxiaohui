@@ -458,4 +458,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		function callbackByDorm(data){
 			$("#dormData").html(data).find('select').combobox();
 		}
+		/*入住操作*/
+		function inDorm(){
+			var dorm = $("#dorm_id").combobox('getValue'); 
+			$("#form1").form("submit",{
+				url:"StudentManageAction!inDorm.action?dorm_id=" + dorm,
+				onSubmit:function(){
+					return $(this).form('validate');
+				},
+				success:function(result){
+					var result=eval("("+result+")");
+					if(result.errorMsg){
+						$.messager.alert("系统提示",result.errorMsg,"warning");
+						return;
+					}else{
+						$.messager.alert("系统提示","入住操作成功！","info");
+						$("#dlginDrom").dialog("close");
+						$("#dg").datagrid("reload");
+					}
+				}
+			});
+		}
+	</script>
 	    	
