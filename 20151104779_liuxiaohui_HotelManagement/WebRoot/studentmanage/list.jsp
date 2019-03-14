@@ -524,4 +524,64 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div id="dlg-buttonsinDrom">
     	<a href="javascript:void(0)" onclick="inDorm()" class="easyui-linkbutton" plain="true" icon="icon-search">确定入住</a>
     </div>
+     <!-- 缺寝登记 -->
+    <div id="dlgLack" class="easyui-dialog" style="width:580px;height:360px;padding:20px 20px"
+            closed="true" buttons="#dlg-buttonsLack">
+        <form id="fmLack" method="post">
+        	<table cellspacing="3px;" border = 1>
+        		<tr>
+        			<td style="width: 70px;">
+        				姓名：<input type="hidden" name = "vo.student_id" id= "student_id">
+        			</td>
+        			<td>
+        				<input name="vo.student_name" id="student_nameLack" readonly="readonly" class="easyui-validatebox" style="width: 180px;">
+        			</td>
+        		
+        			<td style="width: 70px;">性别：</td>
+        			<td>
+        				男：<input name="vo.student_sex" id="student_sex" readonly="readonly" type="radio" class="easyui-validatebox"  value="男">
+        				女：<input name="vo.student_sex" id="student_sex" readonly="readonly" type="radio" class="easyui-validatebox"  value="女">
+        			</td>
+        		</tr>
+        		<tr>
+        			<td>学院：</td>
+        			<td><input name="vo.student_institution" id="student_institutionLack" readonly="readonly"  class="easyui-validatebox" style="width: 180px;"></td>
+        		
+        			<td>专业：</td>
+        			<td><input name="vo.student_major" id="student_majorLack" readonly="readonly"  class="easyui-validatebox" style="width: 180px;"></td>
+        		</tr>
+        		<tr>
+        			<td>班级：</td>
+        			<td><input name="vo.student_class" id="student_classLack" readonly="readonly"  class="easyui-validatebox"  style="width: 180px;"></td>
+        		
+        			<td>楼宇：</td>
+        			<td><input name="vo.student_building" id="student_buildingLack" readonly="readonly" class="easyui-validatebox"  style="width: 180px;"></td>
+        		</tr>
+        		<tr>
+        			<td>宿舍：</td>
+        			<td><input name="vo.student_dorm" id="student_dormLack" readonly="readonly" class="easyui-validatebox"  style="width: 180px;"></td>
+        		</tr>
+        		<tr>
+        			<td>时间段：</td>
+        			<td  colspan = 3>
+        				<input id="txtBeginTime" name="vo.student_lackBeginTime" class="easyui-datetimebox" required="true" data-options="formatter:myformatterStart,parser:myparser"></input>
+        					&nbsp;至  &nbsp;
+						<input id="txtEndTime" name="vo.student_lackEndTime" class="easyui-datetimebox" required="true" data-options="formatter:myformatterEnd,parser:myparser"></input>  
+        			</td>
+        		</tr>
+        		<tr>
+        			<td>原因：</td>
+        			<td>
+        				<input name="vo.student_remark" id="student_remarkLack" class="easyui-validatebox" required="true" style="width: 200px;">
+        			</td>
+        		</tr>
+        	</table>
+        	<br>
+        	<font color="red">注：请填写学生缺寝时间段和原因后保存！</font>
+        </form>
+    </div>
+    <div id="dlg-buttonsLack">
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveUserLack()">保存</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlgLack').dialog('close')">关闭</a>
+	</div>
 	    	
