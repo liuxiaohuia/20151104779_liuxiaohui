@@ -649,4 +649,63 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 		}
 	</script>
+	<!-- 迁出登记 -->
+	<div id="dlg_outDorm" class="easyui-dialog" style="width:420px;height:360px;padding:8px 35px"
+            closed="true" buttons="#dlg-buttons_outDorm">
+         <form id="fm_outDorm" method="post">
+        	<input type="hidden" name="vo.student_id" id="student_id_outDorm"/>
+        	<table cellspacing="7px;">
+        		<tr>
+        			<td>学生学号：</td>		
+        			<td>
+        				<input disabled="disabled" id="student_userName_outDorm" class="easyui-validatebox" required="true" style="width: 200px;">
+        				<input type="hidden" id="student_userName_outDorm1" name="vo.student_userName">
+        			</td>
+        		</tr>
+        		<tr>
+        			<td>学生姓名：</td>
+        			<td><input disabled="disabled" id="student_name_outDorm" class="easyui-validatebox" required="true" style="width: 200px;"></td>
+        		</tr>
+        		<tr>
+        			<td>学生性别：</td>
+        			<td><input disabled="disabled" id="student_sex_outDorm" class="easyui-validatebox" required="true" style="width: 200px;"></td>
+        		</tr>
+        		<tr>
+        			<td>目前楼宇：</td>
+        			<td>
+        				<input disabled="disabled" id="building_name_outDorm" class="easyui-validatebox" required="true" style="width: 200px;">
+        			</td>
+        		</tr>
+        		<tr>
+        			<td>目前寝室：</td>
+        			<td>
+        				<%-- <input type="hidden" name="dorm_id" value="${fixVo.dorm_id }"> --%>
+        				<input disabled="disabled" id="dorm_name_outDorm" class="easyui-validatebox" required="true" style="width: 200px;">
+        			</td>
+        		</tr>
+        		<tr>
+					<td>迁出日期：</td>
+					<td>	
+						<input type="text" id="out_date_outDorm" name="vo.out_date" data-options="formatter:myformatterOut,parser:myparserOut" class="easyui-datebox" style="width:200px"/>
+					</td>
+				</tr>
+        		<tr>
+        			<td><font color="red" style="font-weight: bolder">*</font>迁出备注：</td>
+        			<td>
+        				<input name="vo.student_remark" id="student_remark" class="easyui-validatebox" required="true" style="width: 200px;">
+        			</td>
+        		</tr>
+        		<tr>
+        			<td colspan="2">
+        				<font color="red" style="font-size: 13px">注：此功能只适用于毕业生,迁出后将不可恢复！</font>
+        			</td>
+        		</tr>
+        	</table>
+        </form>
+    </div>
+    <div id="dlg-buttons_outDorm">
+    	<a id="ajax" href="javascript:void(0)" onclick="saveOut()" class="easyui-linkbutton" plain="true" icon="icon-search">确定迁出</a>
+    </div>
+  </body>
+</html>
 	    	
