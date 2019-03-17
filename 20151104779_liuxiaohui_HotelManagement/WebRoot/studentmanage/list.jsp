@@ -584,4 +584,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveUserLack()">保存</a>
 		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlgLack').dialog('close')">关闭</a>
 	</div>
+	<!-- 迁出登记的js -->
+	<script type="text/javascript">
+		// 获取当前日期
+		function myformatterOut(date){  
+		     var y = date.getFullYear();  
+	           var m = date.getMonth()+1;  
+	           var d = date.getDate();  
+	           var time = y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
+	           return time; 
+		}  
+		          
+		function myparserOut(s){  
+		    if (!s) return new Date();
+		    if(s != null && s.length > 0 && s != undefined){
+		    	var ss = (s.split('-')); 
+			    var y = parseInt(ss[0],10);  
+			    var m = parseInt(ss[1],10);  
+			    var d = parseInt(ss[2],10); 
+	            if (!isNaN(y) && !isNaN(m) && !isNaN(d)){  
+	                return new Date(y,m-1,d);  
+	            } else {  
+	                return new Date();  
+	            }  
+		    }  
+		} 
 	    	
