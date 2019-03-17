@@ -609,4 +609,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            }  
 		    }  
 		} 
+		/* 点击迁出登记 按钮触发 */
+		function studentOutDorm(){
+			var selectedRows=$("#dg").datagrid("getSelections");
+			if(selectedRows.length!=1){
+	    		$.messager.alert("系统提示","请选择一条要迁出的学生记录！","warning");
+	    		return;
+	    	}
+	    	var row=selectedRows[0];
+	    	$("#student_id_outDorm").val(row.student_id);
+	    	$("#student_userName_outDorm").val(row.student_userName);
+	    	$("#student_userName_outDorm1").val(row.student_userName);
+	    	$("#student_name_outDorm").val(row.student_name);
+	    	$("#student_sex_outDorm").val(row.student_sex);
+	    	$("#building_name_outDorm").val(row.student_building);
+	    	$("#dorm_name_outDorm").val(row.student_dorm);
+	    	var curr_time = new Date(); 
+			$("#out_date_outDorm").datebox("setValue",myformatterOut(curr_time));  
+	    	
+			$("#dlg_outDorm").dialog("open").dialog("setTitle","学生迁出登记");
+		}
+
+		function saveOut(){
+			$("#fm_outDorm").form("submit",{
+				url:"StudentManageAction!queryOutVo.action",
+				onSubmit:function(){
+					return $(this).form('validate');
+				},
+				success:function(result){
+					var result=eval("("+result+")");
+					if(result.errorMsg){
+						$.messager.alert("系统提示",result.errorMsg,"warning");
+						return;
+					}else{
+						$.messager.alert("系统提示","操作成功，该学生已经迁出寝室！","info");
+						$("#dlg_outDorm").dialog("close");
+					}
+				}
+			});
+		}
+	</script>
 	    	
