@@ -44,3 +44,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <div region="west" split="true" title="West" style="width:100px;"></div>  
 	    <div region="center" title="center title" style="padding:5px;background:#eee;"></div>  
 	</div>  
+	</div>
+	
+	<!--1.4 region="east",必须指明宽度-->
+	<div region="east"  style="width:100px;">页面右侧</div>
+	
+	<!--1.5 region="south"，指明高度，可以自适应-->
+	<div region="south" style="height:50px;"><center> <h3>页面底部</h3></center></div>
+</body>
+</html>
